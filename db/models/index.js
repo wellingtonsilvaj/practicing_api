@@ -32,7 +32,7 @@ if (config.use_env_variable) {
 //Verificar a conexão com BD
 sequelize.authenticate()
 .then( function(){
-  console.log("Conexão com o BANCO DE DADOS realizada com sucesso!");
+  console.log("Conexão com o BANCO DE DADOS realizado com sucesso!");
 }).catch(function(error){
   console.log("ERRO: Conexão com o BANCO DE DADOS NÃO realizado com sucesso!", error);
 });
