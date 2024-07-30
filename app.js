@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 
 //Testar a conexão com BD
-const db = require("./db/models");
+//const db = require("./db/models");
 
 //Incluir as CONTROLLERS
 const home = require("./controllers/home");
