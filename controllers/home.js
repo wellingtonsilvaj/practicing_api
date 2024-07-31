@@ -28,12 +28,23 @@ router.get("/", async (req, res) => {
             //where:{id:2}
         });
 
+        //Recuperar o registro do BD
+        const homesPremiums = await db.HomesPremiums.findOne({
+
+            //Indicar quais colunas recuperar
+            attributes: ['premTitle', 'premSubtitle', 'premDesc', 'premBtn_text', 'premBtn_link','premImage'],
+            //where:{id:2}
+        });
+
+
     //Acessa o IF se encontrar o registro no BD
-if ((homesTops) && (homesServices)){
+if ((homesTops) && (homesServices) && (homesPremiums)){
     return res.json({
         error:false,
         homesTops,
-        homesServices
+        homesServices,
+        homesPremiums
+
     });
 }else{
     return res.status(400).json({
