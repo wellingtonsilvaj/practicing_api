@@ -9,7 +9,9 @@ const router = express.Router();
 
 
 //Criar a rota visualizar método get
-//Endereço para acessar atraves da aplicação externa: http://localhost:8080/home
+//Endereço para acessar a api atraves da aplicação externa: http://localhost:8080/home
+
+
 router.get("/", async (req, res) => {
 
     //Recuperar o registro do BD

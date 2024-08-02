@@ -10,10 +10,13 @@ const app = express();
 
 //Incluir as CONTROLLERS
 const home = require("./controllers/home");
+const aboutsCompanies = require("./controllers/aboutsCompanies");
+
 const contactMessage = require("./controllers/contactMessage");
 
 //Criar as rotas
 app.use('/home', home);
+app.use('/about-companies', aboutsCompanies);
 app.use('/contact-message', contactMessage);
 
 
