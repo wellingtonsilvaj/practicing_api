@@ -1,6 +1,8 @@
 //Incluir as bibliotecas
 //Gerencia as requisições, rotas e URLs, entre outra funcionalidades
 const express = require('express');
+//Incluir o módulo para gerenciar diretórios e caminhos
+const path = require("path");
 
 // Chamar a função express
 const app = express();
@@ -9,6 +11,9 @@ const app = express();
 app.use(express.json());
 //Testar a conexão com BD
 //const db = require("./db/models");
+
+//Local dos arquivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
 
 //Incluir as CONTROLLERS
 const home = require("./controllers/home");

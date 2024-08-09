@@ -5,6 +5,8 @@ const express = require("express");
 const db = require('../db/models');
 //Chamar a função express
 const router = express.Router();
+//Validar input do formulário
+const yup = require('yup');
 
 // Endereço para acessar através da aplicação externa: http://localhost:8080/contact-menssage
 /*
@@ -24,6 +26,28 @@ router.post("/", async (req, res) => {
     //Receber os dados enviados no corpo da requisição
     var data = req.body;
 
+    //Validar os campos utilizando o yup
+    const schema = yup.object().shape({
+        content: yup.string("Erro: Necessário preencher o campo conteúdo!")
+            .required("Erro: Necessário preencher o campo conteúdo!"),
+        subject: yup.string("Erro: Necessário preencher o campo assunto!")
+            .required("Erro: Necessário preencher o campo assunto!"),
+        email: yup.string("Erro: Necessário preencher o campo e-mail!")
+            .required("Erro: Necessário preencher o campo e-mail!")
+            .email("Erro: Necessário preencher e-mail válido"),
+        name: yup.string("Erro: Necessário preencher o campo nome!")
+            .required("Erro: Necessário preencher o campo nome!")
+    });
+
+    //Verificar se todos os campos passaram pela validação
+    try{
+        await schema.validate(data);
+    }catch(error){
+        return res.status(400).json({
+            error: true,
+            message: error.errors
+        });
+    }
     //Salvar no BD
     await db.ContactsMsgs.create(data)
     .then((dataContactsMsgs) => {

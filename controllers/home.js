@@ -41,7 +41,14 @@ router.get("/", async (req, res) => {
 
     //Acessa o IF se encontrar o registro no BD
 if ((homesTops) && (homesServices) && (homesPremiums)){
-    return res.json({
+
+        //Criar o caminho da imagem do topo
+        homesTops.dataValues['imageTop'] = process.env.URL_ADM + "/images/home_top/" + homesTops.dataValues['imageTop']
+        
+        //Criar o caminho da imagem do serviço premium
+        homesPremiums.dataValues['premImage'] = process.env.URL_ADM + "/images/home_prem/" + homesPremiums.dataValues['premImage']
+
+        return res.json({
         error:false,
         homesTops,
         homesServices,

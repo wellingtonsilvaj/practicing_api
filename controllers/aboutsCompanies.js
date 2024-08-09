@@ -16,7 +16,10 @@ router.get("/", async (req, res) => {
     const aboutsCompanies = await db.AboutsCompanies.findAll({
 
         //Indicar quais colunas recuperar
-        attributes: ['id', 'title', 'description', 'image', 'situationAboutId'],
+        attributes: ['id', 'title', 'description', 'situationAboutId',
+            //Concatenar o endereço do administrativo e o nome da imagem
+            [db.sequelize.fn('CONCAT', process.env.URL_ADM + "/images/about/", db.sequelize.col('image')), 'image']
+        ],
 
         //Buscar dados na tabela secundaria
         include:[{
@@ -32,6 +35,10 @@ router.get("/", async (req, res) => {
 
     //Acessa o IF se encontrar o registro no BD
 if (aboutsCompanies){
+
+    //Criar caminho da imagem sobre empresa
+    //aboutsCompanies.dataValues['image'] = process.env.URL_ADM + "/images/about/" + aboutsCompanies.dataValues['image']
+
     return res.json({
         error:false,
         aboutsCompanies
